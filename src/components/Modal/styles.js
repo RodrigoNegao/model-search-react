@@ -9,7 +9,8 @@ const Overlay = styled.div`
 
   display: flex;
   justify-content: center;
-  align-ites: center;
+  align-items: center;
+  width: 100%;
   height: 100%;
 
   background-color: rgba(78, 89, 131, 0.5);
@@ -29,3 +30,5 @@ const Dialog = styled.div`
   box-shadow: 0px 0px 32px rgba(78, 89, 131, 0.2);
   border-radius: 8px;
 `;
+
+export { Overlay, Dialog };
