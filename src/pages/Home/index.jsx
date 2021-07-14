@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-//import Slider from 'react-slick';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
-import { Wrapper, Carousel, Container, Search, Logo, CarouselTitle, Map } from './styles';
+import { Wrapper, Carousel, Container, Search, Logo, CarouselTitle } from './styles';
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
-import { ItemCard, Card, Modal } from '../../components';
+import { ItemCard, Card, Modal, Map } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
 
-  const [modalOpened, setModalOpened] = useState(true);
+  const [modalOpened, setModalOpened] = useState(false);
 
   const settings = {
     dots: false,
