@@ -6,13 +6,14 @@ const Card = styled.div`
   justify-content: center;
   width: 90px;
   height: 90px;
-  boder-radius: 5px;
+  border-radius: 6px;
   background-image: url(${(props) => props.photo});
   background-size: cover;
 `;
 
 const Title = styled.span`
   font-family: ${(props) => props.theme.fonts.regular};
+  background-color: ${(props) => props.theme.colors.background};
   color: #ffffff;
   font-size: 16px;
   margin-top: 10px;

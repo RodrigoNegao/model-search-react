@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
-import { setItems } from '../../redux/modules/items';
+import { setItems, setItem } from '../../redux/modules/items';
 
 const MapContainer = (props) => {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.items);
   const [map, setMap] = useState(null);
-  const { google, query } = props;
+  const { google, query, itemId } = props;
 
   function searchbyQuery(query) {
     const service = new google.maps.places.PlacesService(map);
@@ -34,6 +34,28 @@ const MapContainer = (props) => {
     }
   }, [query]);
 
+  function getItemById(itemId) {
+    const service = new google.maps.places.PlacesService(map);
+
+    const request = {
+      itemId,
+      fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
+    };
+
+    service.getDetails(request, (resultId, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        //console.log('resta', resultId);
+        dispatch(setItem(resultId));
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (itemId) {
+      getItemById(itemId);
+    }
+  }, [itemId]);
+
   function searchNearby(map, center) {
     const service = new google.maps.places.PlacesService(map);
 
@@ -46,14 +68,6 @@ const MapContainer = (props) => {
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         //console.log('resta', results);
-        //console.log(dispatch(setItems(results)));
-        // console.log(
-        //   'items',
-        //   items.map((item) => ({
-        //     item: item.geometry.location.lat(),
-        //     item1: item.geometry.location.lng(),
-        //   }))
-        // );
         dispatch(setItems(results));
       }
     });
@@ -65,7 +79,13 @@ const MapContainer = (props) => {
   }
 
   return (
-    <Map google={google} centerAroundCurrentLocation onReady={onMapReady} onRecenter={onMapReady}>
+    <Map
+      google={google}
+      centerAroundCurrentLocation
+      onReady={onMapReady}
+      onRecenter={onMapReady}
+      zoom={16}
+      {...props}>
       {items.map((item) => (
         <Marker
           key={item.place_id}
@@ -76,7 +96,7 @@ const MapContainer = (props) => {
           }}
         />
       ))}
-      ;{/* <Marker /> */}
+      <Marker />
     </Map>
   );
 };

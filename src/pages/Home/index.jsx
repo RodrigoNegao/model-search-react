@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
@@ -10,11 +11,14 @@ import { ItemCard, Card, Modal, Map } from '../../components';
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState(null);
+  const [itemId, setItemId] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
+  const { items, itemSelected } = useSelector((state) => state.items);
 
   const settings = {
     dots: false,
     infinite: true,
+    autoplay: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
@@ -25,6 +29,11 @@ const Home = () => {
     if (e.key === 'Enter') {
       setQuery(inputValue);
     }
+  }
+
+  function handleOpenModal(itemId) {
+    setItemId(itemId);
+    setModalOpened(true);
   }
 
   return (
@@ -45,18 +54,25 @@ const Home = () => {
           </TextField>
           <CarouselTitle>Na sua Area</CarouselTitle>
           <Carousel {...settings}>
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
+            {items.map((item) => (
+              <Card
+                key={item.place_id}
+                photo={item.photos ? item.photos[0].getUrl() : restaurante}
+                title={item.name}
+              />
+            ))}
           </Carousel>
         </Search>
-        <ItemCard />
+        {items.map((item) => (
+          <ItemCard item={item} onClick={() => handleOpenModal(item.place_id)} />
+        ))}
       </Container>
-      <Map query={query} />
-      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
+      <Map query={query} itemId={itemId} />
+      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
+        <p>{itemSelected?.name}</p>
+        <p>{itemSelected?.formatted_phone_number}</p>
+        <p>{itemSelected?.formatted_address}</p>
+      </Modal>
     </Wrapper>
   );
 };

@@ -43,8 +43,8 @@ const CarouselTitle = styled.h1`
 `;
 
 const Carousel = styled(Slider)`
-  slick-slider {
-    margin-right: 16px;
+  .slick-slide {
+    margin-right: 20px;
   }
 `;
 

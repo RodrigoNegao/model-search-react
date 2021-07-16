@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action) {
     case Types.SET_ITEMS:
       return { ...state, items: action.payload };
     case Types.SET_ITEM:
-      return { ...state, item: action.payload };
+      return { ...state, itemSelected: action.payload };
     default:
       return state;
   }
