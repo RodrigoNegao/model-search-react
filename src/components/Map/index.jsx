@@ -42,10 +42,10 @@ const MapContainer = (props) => {
       fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
     };
 
-    service.getDetails(request, (resultId, status) => {
+    service.getDetails(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         //console.log('resta', resultId);
-        dispatch(setItem(resultId));
+        dispatch(setItem(results));
       }
     });
   }
