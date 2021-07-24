@@ -1,4 +1,4 @@
-export const Types = {
+const Types = {
   SET_ITEMS: 'items/SET_ITEMS',
   SET_ITEM: 'items/SET_ITEM',
 };
@@ -7,7 +7,7 @@ const initialState = {
   itemSelected: null,
 };
 
-export default function reducer(state = initialState, action) {
+function reducer(state = initialState, action) {
   switch (action.type) {
     case Types.SET_ITEMS:
       return { ...state, items: action.payload };
@@ -18,16 +18,18 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export function setItems(items) {
+function setItems(items) {
   return {
     type: Types.SET_ITEMS,
     payload: items,
   };
 }
 
-export function setItem(item) {
+function setItem(item) {
   return {
     type: Types.SET_ITEM,
     payload: item,
   };
 }
+
+export { Types, reducer, setItems, setItem };

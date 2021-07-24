@@ -8,7 +8,7 @@ const MapContainer = (props) => {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.items);
   const [map, setMap] = useState(null);
-  const { google, query, itemId } = props;
+  const { google, query, placeId } = props;
 
   function searchbyQuery(query) {
     const service = new google.maps.places.PlacesService(map);
@@ -34,11 +34,11 @@ const MapContainer = (props) => {
     }
   }, [query]);
 
-  function getItemById(itemId) {
+  function getItemById(placeId) {
     const service = new google.maps.places.PlacesService(map);
 
     const request = {
-      itemId,
+      placeId,
       fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
     };
 
@@ -51,10 +51,10 @@ const MapContainer = (props) => {
   }
 
   useEffect(() => {
-    if (itemId) {
-      getItemById(itemId);
+    if (placeId) {
+      getItemById(placeId);
     }
-  }, [itemId]);
+  }, [placeId]);
 
   function searchNearby(map, center) {
     const service = new google.maps.places.PlacesService(map);

@@ -11,7 +11,7 @@ import { ItemCard, Card, Modal, Map } from '../../components';
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState(null);
-  const [itemId, setItemId] = useState(null);
+  const [placeId, setItemId] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
   const { items, itemSelected } = useSelector((state) => state.items);
 
@@ -31,9 +31,11 @@ const Home = () => {
     }
   }
 
-  function handleOpenModal(itemId) {
-    setItemId(itemId);
+  function handleOpenModal(placeId) {
+    setItemId(placeId);
     setModalOpened(true);
+    //console.log('placeId: ', placeId);
+    //console.log('itemSelected: ', itemSelected);
   }
 
   return (
@@ -67,7 +69,7 @@ const Home = () => {
           <ItemCard item={item} onClick={() => handleOpenModal(item.place_id)} />
         ))}
       </Container>
-      <Map query={query} itemId={itemId} />
+      <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
         <p>{itemSelected?.name}</p>
         <p>{itemSelected?.formatted_phone_number}</p>
