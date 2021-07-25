@@ -3,7 +3,16 @@ import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
-import { Wrapper, Carousel, Container, Search, Logo, CarouselTitle } from './styles';
+import {
+  Wrapper,
+  Carousel,
+  Container,
+  Search,
+  Logo,
+  CarouselTitle,
+  ModalTitle,
+  ModalContent,
+} from './styles';
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
 import { ItemCard, Card, Modal, Map } from '../../components';
@@ -71,9 +80,9 @@ const Home = () => {
       </Container>
       <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-        <p>{itemSelected?.name}</p>
-        <p>{itemSelected?.formatted_phone_number}</p>
-        <p>{itemSelected?.formatted_address}</p>
+        <ModalTitle>{itemSelected?.name}</ModalTitle>
+        <ModalContent>{itemSelected?.formatted_phone_number}</ModalContent>
+        <ModalContent>{itemSelected?.formatted_address}</ModalContent>
       </Modal>
     </Wrapper>
   );

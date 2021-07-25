@@ -48,5 +48,21 @@ const Carousel = styled(Slider)`
   }
 `;
 
-// scroll
-export { Wrapper, Carousel, Container, Search, Logo, Map, CarouselTitle };
+const ModalTitle = styled.p`
+  margin-bottom: 10px;
+  letter-spacing: 0.11px;
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.colors.text};
+  line-height: 29px;
+  font-size: 24px;
+  font-weight: bold;
+`;
+
+const ModalContent = styled.p`
+  ${ModalTitle};
+  font-weight: normal;
+  line-height: 19px;
+  font-size: 19px;
+`;
+
+export { Wrapper, Carousel, Container, Search, Logo, Map, CarouselTitle, ModalTitle, ModalContent };
