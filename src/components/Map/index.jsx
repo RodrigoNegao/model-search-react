@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
@@ -10,54 +10,63 @@ const MapContainer = (props) => {
   const [map, setMap] = useState(null);
   const { google, query, placeId } = props;
 
-  function searchbyQuery(query) {
-    const service = new google.maps.places.PlacesService(map);
+  const searchbyQuery = useCallback(
+    (map, query) => {
+      const service = new google.maps.places.PlacesService(map);
+      dispatch(setItems([]));
 
-    const request = {
-      location: map.center,
-      radius: '200',
-      type: ['restaurant'],
-      query,
-    };
+      const request = {
+        location: map.center,
+        radius: '200',
+        type: ['restaurant'],
+        query,
+      };
 
-    service.textSearch(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        //console.log('query', results);
-        dispatch(setItems(results));
-      }
-    });
-  }
+      service.textSearch(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          //console.log('query', results);
+          dispatch(setItems(results));
+        }
+      });
+    },
+    [dispatch, google]
+  );
 
   useEffect(() => {
     if (query) {
       searchbyQuery(query);
     }
-  }, [query]);
+  }, [query, searchbyQuery]);
 
-  function getItemById(placeId) {
-    const service = new google.maps.places.PlacesService(map);
+  const getItemById = useCallback(
+    (placeId) => {
+      const service = new google.maps.places.PlacesService(map);
+      dispatch(setItem(null));
 
-    const request = {
-      placeId,
-      fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
-    };
+      const request = {
+        placeId,
+        fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
+      };
 
-    service.getDetails(request, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        //console.log('resta', resultId);
-        dispatch(setItem(results));
-      }
-    });
-  }
+      service.getDetails(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          //console.log('resta', resultId);
+          dispatch(setItem(results));
+        }
+      });
+    },
+    [google, map, dispatch]
+  );
 
   useEffect(() => {
     if (placeId) {
       getItemById(placeId);
     }
-  }, [placeId]);
+  }, [getItemById, placeId]);
 
   function searchNearby(map, center) {
     const service = new google.maps.places.PlacesService(map);
+    dispatch(setItems([]));
 
     const request = {
       location: center,

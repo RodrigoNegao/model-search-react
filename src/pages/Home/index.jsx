@@ -15,7 +15,7 @@ import {
 } from './styles';
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
-import { ItemCard, Card, Modal, Map } from '../../components';
+import { ItemCard, Card, Modal, Map, Loader, Skeleton } from '../../components';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState('');
@@ -55,7 +55,6 @@ const Home = () => {
           <TextField
             label="Pesquise"
             outlined
-            //onTrailingIconSelect={() => this.setState({ value: '' })}
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
             <Input
               value={inputValue}
@@ -63,16 +62,22 @@ const Home = () => {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </TextField>
-          <CarouselTitle>Na sua Area</CarouselTitle>
-          <Carousel {...settings}>
-            {items.map((item) => (
-              <Card
-                key={item.place_id}
-                photo={item.photos ? item.photos[0].getUrl() : restaurante}
-                title={item.name}
-              />
-            ))}
-          </Carousel>
+          {items.length > 0 ? (
+            <>
+              <CarouselTitle>Na sua Area</CarouselTitle>
+              <Carousel {...settings}>
+                {items.map((item) => (
+                  <Card
+                    key={item.place_id}
+                    photo={item.photos ? item.photos[0].getUrl() : restaurante}
+                    title={item.name}
+                  />
+                ))}
+              </Carousel>
+            </>
+          ) : (
+            <Loader />
+          )}
         </Search>
         {items.map((item) => (
           <ItemCard item={item} onClick={() => handleOpenModal(item.place_id)} />
@@ -80,9 +85,23 @@ const Home = () => {
       </Container>
       <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-        <ModalTitle>{itemSelected?.name}</ModalTitle>
-        <ModalContent>{itemSelected?.formatted_phone_number}</ModalContent>
-        <ModalContent>{itemSelected?.formatted_address}</ModalContent>
+        {itemSelected ? (
+          <>
+            <ModalTitle>{itemSelected?.name}</ModalTitle>
+            <ModalContent>{itemSelected?.formatted_phone_number}</ModalContent>
+            <ModalContent>{itemSelected?.formatted_address}</ModalContent>
+            <ModalContent>
+              {itemSelected?.openning_hours?.open_now ? 'Aberto Agora o/' : 'Fechado neste momento'}
+            </ModalContent>
+          </>
+        ) : (
+          <>
+            <Skeleton width="10px" height="25px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+          </>
+        )}
       </Modal>
     </Wrapper>
   );

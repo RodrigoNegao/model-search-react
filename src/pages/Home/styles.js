@@ -59,7 +59,10 @@ const ModalTitle = styled.p`
 `;
 
 const ModalContent = styled.p`
-  ${ModalTitle};
+  margin-bottom: 10px;
+  letter-spacing: 0.11px;
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.colors.text};
   font-weight: normal;
   line-height: 19px;
   font-size: 19px;

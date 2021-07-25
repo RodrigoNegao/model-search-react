@@ -1,29 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import { Card, Title } from './styles';
 
-const Card = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 90px;
-  height: 90px;
-  border-radius: 6px;
-  background-image: url(${(props) => props.photo});
-  background-size: cover;
-`;
+import Skeleton from '../Skeleton';
 
-const Title = styled.span`
-  font-family: ${(props) => props.theme.fonts.regular};
-  background-color: ${(props) => props.theme.colors.background};
-  color: #ffffff;
-  font-size: 16px;
-  margin-top: 10px;
-  margin-left: 10px;
-`;
+const ImageCard = ({ photo, title }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-const ImageCard = ({ photo, title }) => (
-  <Card photo={photo}>
-    <Title>{title}</Title>
-  </Card>
-);
+  useEffect(() => {
+    // Cria uma tag <img>
+    const imageLoader = new Image();
+    imageLoader.src = photo;
+    imageLoader.onload = () => setImageLoaded(true);
+  }, [photo]);
+
+  return (
+    <>
+      {imageLoaded ? (
+        <Card photo={photo}>
+          <Title>{title}</Title>
+        </Card>
+      ) : (
+        <Skeleton width="90px" height="90px" />
+      )}
+    </>
+  );
+};
 
 export default ImageCard;
