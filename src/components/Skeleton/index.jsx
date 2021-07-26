@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const KeyFrameLoading = keyframes`
+const keyFrameLoading = keyframes`
     0%{
         opacity:0.5;
     }
@@ -16,7 +16,7 @@ const LoadingSkeleton = styled.div`
   margin-bottom: 10px;
   min-width: ${(props) => props.width};
   height: ${(props) => props.height};
-  animation: ${KeyFrameLoading} 500ms inifinite alternate;
+  animation: ${keyFrameLoading} 500ms infinite alternate;
 `;
 
 export default ({ width, height }) => <LoadingSkeleton width={width} height={height} />;

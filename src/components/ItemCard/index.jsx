@@ -18,7 +18,7 @@ const ItemCard = ({ item, onClick }) => {
         imageLoaded={imageLoaded}
         src={item.photos ? item.photos[0].getUrl() : restaurante}
         onLoad={() => setImageLoaded(true)}
-        alt="Foto do Item"
+        alt="Foto Item"
       />
       {!imageLoaded && <Skeleton width="100px" height="100px" />}
     </Item>

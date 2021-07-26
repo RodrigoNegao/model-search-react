@@ -69,12 +69,13 @@ const MapContainer = (props) => {
 
   function searchNearby(map, center) {
     const service = new google.maps.places.PlacesService(map);
-    dispatch(setItems([]));
+    //dispatch(setItems([]));
+    //type: ['restaurant'],
 
     const request = {
       location: center,
       radius: '1000',
-      type: ['restaurant'],
+      type: ['bar'],
     };
 
     service.nearbySearch(request, (results, status) => {

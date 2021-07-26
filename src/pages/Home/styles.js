@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import TextField from '@material/react-text-field';
+import { withStyles } from '@material-ui/core/styles';
+
+//https://material-ui.com/pt/customization/components/
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,16 +25,14 @@ const Search = styled.section`
   padding: 16px;
 `;
 
+const SearchField = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Logo = styled.img`
   margin-bottom: 15px;
   height: 50px;
-`;
-
-// eslint-disable-next-line
-//testes
-const Map = styled.div`
-  background-color: red;
-  width: 100vw;
 `;
 
 const CarouselTitle = styled.h1`
@@ -68,4 +70,23 @@ const ModalContent = styled.p`
   font-size: 19px;
 `;
 
-export { Wrapper, Carousel, Container, Search, Logo, Map, CarouselTitle, ModalTitle, ModalContent };
+// const TextFieldCustom = styled(TextField)`
+//   width: 80vw;
+// `;
+
+const TextFieldCustom = styled(TextField)`
+  width: 80vw;
+`;
+
+export {
+  TextFieldCustom,
+  SearchField,
+  Wrapper,
+  Carousel,
+  Container,
+  Search,
+  Logo,
+  CarouselTitle,
+  ModalTitle,
+  ModalContent,
+};

@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {
+  TextFieldCustom,
+  SearchField,
   Wrapper,
   Carousel,
   Container,
@@ -14,7 +18,6 @@ import {
   ModalContent,
 } from './styles';
 import logo from '../../assets/logo.svg';
-import restaurante from '../../assets/restaurante-fake.png';
 import { ItemCard, Card, Modal, Map, Loader, Skeleton } from '../../components';
 
 const Home = () => {
@@ -45,6 +48,11 @@ const Home = () => {
     }
   }
 
+  function handleClick(e) {
+    setQuery(value);
+    //console.log('value: ', value);
+  }
+
   function handleOpenModal(placeId) {
     setItemId(placeId);
     setModalOpened(true);
@@ -57,22 +65,40 @@ const Home = () => {
       <Container>
         <Search>
           <Logo src={logo} alt="logo do restaurante" />
-          <TextField
+          <SearchField>
+            <TextFieldCustom label="Pesquise" outlined>
+              <Input value={value} onKeyPress={handleKeyPress} onChange={handleChange} />
+            </TextFieldCustom>
+            <IconButton onClick={handleClick}>
+              <SearchIcon />
+            </IconButton>
+          </SearchField>
+          {/* <TextField
             label="Pesquise"
             outlined
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
             <Input value={value} onKeyPress={handleKeyPress} onChange={handleChange} />
-          </TextField>
+          </TextField> */}
+          {/* <TextField
+            label="With normal TextField"
+            InputProps={{
+              endAdornment: (
+                <>
+                  <InputAdornment value={value} onKeyPress={handleKeyPress} onChange={handleChange}>
+                    <IconButton onClick={handleClick}>
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                </>
+              ),
+            }}
+          /> */}
           {items.length > 0 ? (
             <>
               <CarouselTitle>Na sua Area</CarouselTitle>
               <Carousel {...settings}>
                 {items.map((item) => (
-                  <Card
-                    key={item.place_id}
-                    photo={item.photos ? item.photos[0].getUrl() : restaurante}
-                    title={item.name}
-                  />
+                  <Card key={item.place_id} item={item} />
                 ))}
               </Carousel>
             </>
