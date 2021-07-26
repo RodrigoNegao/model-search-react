@@ -18,7 +18,7 @@ import restaurante from '../../assets/restaurante-fake.png';
 import { ItemCard, Card, Modal, Map, Loader, Skeleton } from '../../components';
 
 const Home = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [value, setInputValue] = useState('');
   const [query, setQuery] = useState(null);
   const [placeId, setItemId] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
@@ -34,9 +34,14 @@ const Home = () => {
     adaptiveHeight: true,
   };
 
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   function handleKeyPress(e) {
     if (e.key === 'Enter') {
-      setQuery(inputValue);
+      setQuery(value);
+      //console.log('value: ', value);
     }
   }
 
@@ -56,11 +61,7 @@ const Home = () => {
             label="Pesquise"
             outlined
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
-            <Input
-              value={inputValue}
-              onKeyPress={handleKeyPress}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
+            <Input value={value} onKeyPress={handleKeyPress} onChange={handleChange} />
           </TextField>
           {items.length > 0 ? (
             <>

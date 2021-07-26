@@ -6,6 +6,7 @@ import Skeleton from '../Skeleton';
 const ImageCard = ({ photo, title }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  //TODO fix  one carosel
   useEffect(() => {
     // Cria uma tag <img>
     const imageLoader = new Image();
