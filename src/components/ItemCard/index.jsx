@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { Item, ItemInfo, Title, Address, ItemPhoto } from './styles';
-import restaurante from '../../assets/restaurante-fake.png';
+//import restaurante from '../../assets/restaurante-fake.png';
+import pub from '../../assets/pub.jpg';
 import Skeleton from '../Skeleton';
 
 const ItemCard = ({ item, onClick }) => {
@@ -16,7 +17,7 @@ const ItemCard = ({ item, onClick }) => {
       </ItemInfo>
       <ItemPhoto
         imageLoaded={imageLoaded}
-        src={item.photos ? item.photos[0].getUrl() : restaurante}
+        src={item.photos ? item.photos[0].getUrl() : pub}
         onLoad={() => setImageLoaded(true)}
         alt="Foto Item"
       />

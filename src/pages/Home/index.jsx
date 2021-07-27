@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import TextField, { Input } from '@material/react-text-field';
-import MaterialIcon from '@material/react-material-icon';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 
 import {
-  TextFieldCustom,
-  SearchField,
   Wrapper,
   Carousel,
   Container,
@@ -16,9 +10,10 @@ import {
   CarouselTitle,
   ModalTitle,
   ModalContent,
+  ModalOpen,
 } from './styles';
-import logo from '../../assets/logo.svg';
-import { ItemCard, Card, Modal, Map, Loader, Skeleton } from '../../components';
+import logo from '../../assets/logo1.svg';
+import { ItemCard, Card, Modal, Map, Loader, Skeleton, SearchFieldCustom } from '../../components';
 
 const Home = () => {
   const [value, setInputValue] = useState('');
@@ -48,7 +43,7 @@ const Home = () => {
     }
   }
 
-  function handleClick(e) {
+  function handleClick() {
     setQuery(value);
     //console.log('value: ', value);
   }
@@ -65,40 +60,23 @@ const Home = () => {
       <Container>
         <Search>
           <Logo src={logo} alt="logo do restaurante" />
-          <SearchField>
-            <TextFieldCustom label="Pesquise" outlined>
-              <Input value={value} onKeyPress={handleKeyPress} onChange={handleChange} />
-            </TextFieldCustom>
-            <IconButton onClick={handleClick}>
-              <SearchIcon />
-            </IconButton>
-          </SearchField>
-          {/* <TextField
-            label="Pesquise"
-            outlined
-            trailingIcon={<MaterialIcon role="button" icon="search" />}>
-            <Input value={value} onKeyPress={handleKeyPress} onChange={handleChange} />
-          </TextField> */}
-          {/* <TextField
-            label="With normal TextField"
-            InputProps={{
-              endAdornment: (
-                <>
-                  <InputAdornment value={value} onKeyPress={handleKeyPress} onChange={handleChange}>
-                    <IconButton onClick={handleClick}>
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                </>
-              ),
-            }}
-          /> */}
+          <SearchFieldCustom
+            value={value}
+            onKeyPress={handleKeyPress}
+            onChange={handleChange}
+            onClick={handleClick}>
+            Pesquisar
+          </SearchFieldCustom>
           {items.length > 0 ? (
             <>
               <CarouselTitle>Na sua Area</CarouselTitle>
               <Carousel {...settings}>
                 {items.map((item) => (
-                  <Card key={item.place_id} item={item} />
+                  <Card
+                    key={item.place_id}
+                    item={item}
+                    onClick={() => handleOpenModal(item.place_id)}
+                  />
                 ))}
               </Carousel>
             </>
@@ -117,9 +95,9 @@ const Home = () => {
             <ModalTitle>{itemSelected?.name}</ModalTitle>
             <ModalContent>{itemSelected?.formatted_phone_number}</ModalContent>
             <ModalContent>{itemSelected?.formatted_address}</ModalContent>
-            <ModalContent>
-              {itemSelected?.openning_hours?.open_now ? 'Aberto Agora o/' : 'Fechado neste momento'}
-            </ModalContent>
+            <ModalOpen>
+              {itemSelected?.opening_hours?.isOpen ? 'Aberto Agora o/' : 'Fechado neste momento'}
+            </ModalOpen>
           </>
         ) : (
           <>

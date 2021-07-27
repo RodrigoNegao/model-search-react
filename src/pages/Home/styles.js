@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import TextField from '@material/react-text-field';
-import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
 
-//https://material-ui.com/pt/customization/components/
+const IconButtonCustom = styled(IconButton)`
+  & {
+    margin-top: 8px !important;
+  }
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,6 +37,7 @@ const SearchField = styled.div`
 `;
 
 const Logo = styled.img`
+  margin-top: 5px;
   margin-bottom: 15px;
   height: 50px;
 `;
@@ -56,7 +63,7 @@ const ModalTitle = styled.p`
   font-family: ${(props) => props.theme.fonts.regular};
   color: ${(props) => props.theme.colors.text};
   line-height: 29px;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
 `;
 
@@ -70,16 +77,19 @@ const ModalContent = styled.p`
   font-size: 19px;
 `;
 
-// const TextFieldCustom = styled(TextField)`
-//   width: 80vw;
-// `;
-
-const TextFieldCustom = styled(TextField)`
-  width: 80vw;
+const ModalOpen = styled.p`
+  margin-bottom: 10px;
+  letter-spacing: 0.11px;
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.colors.text};
+  font-weight: bold;
+  line-height: 19px;
+  font-size: 22px;
 `;
 
 export {
-  TextFieldCustom,
+  IconButtonCustom,
+  ModalOpen,
   SearchField,
   Wrapper,
   Carousel,

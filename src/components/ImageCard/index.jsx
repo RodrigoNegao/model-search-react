@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Card, Title } from './styles';
 
 import Skeleton from '../Skeleton';
-import restaurante from '../../assets/restaurante-fake.png';
+import pub from '../../assets/pub.jpg';
 
-const ImageCard = ({ item }) => {
+const ImageCard = ({ item, onClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const image = item.photos ? item.photos[0].getUrl() : restaurante;
+  const image = item.photos ? item.photos[0].getUrl() : pub;
 
   //TODO fix  one carosel
   useEffect(() => {
@@ -20,7 +20,7 @@ const ImageCard = ({ item }) => {
   return (
     <>
       {imageLoaded ? (
-        <Card photo={image}>
+        <Card onClick={onClick} photo={image}>
           <Title>{item.name}</Title>
         </Card>
       ) : (
