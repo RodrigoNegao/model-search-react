@@ -1,15 +1,5 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import IconButton from '@material-ui/core/IconButton';
-
-const IconButtonCustom = styled(IconButton)`
-  & {
-    margin-top: 8px !important;
-  }
-  &:hover {
-    color: ${(props) => props.theme.colors.primary};
-  }
-`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,11 +19,6 @@ const Search = styled.section`
   justify-content: center;
   background-color: #ffffff;
   padding: 16px;
-`;
-
-const SearchField = styled.div`
-  display: flex;
-  flex-direction: row;
 `;
 
 const Logo = styled.img`
@@ -88,9 +73,6 @@ const ModalOpen = styled.p`
 `;
 
 export {
-  IconButtonCustom,
-  ModalOpen,
-  SearchField,
   Wrapper,
   Carousel,
   Container,
@@ -99,4 +81,5 @@ export {
   CarouselTitle,
   ModalTitle,
   ModalContent,
+  ModalOpen,
 };

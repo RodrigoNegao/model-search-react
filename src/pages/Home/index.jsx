@@ -39,20 +39,16 @@ const Home = () => {
   function handleKeyPress(e) {
     if (e.key === 'Enter') {
       setQuery(value);
-      //console.log('value: ', value);
     }
   }
 
   function handleClick() {
     setQuery(value);
-    //console.log('value: ', value);
   }
 
   function handleOpenModal(placeId) {
     setItemId(placeId);
     setModalOpened(true);
-    //console.log('placeId: ', placeId);
-    //console.log('itemSelected: ', itemSelected);
   }
 
   return (

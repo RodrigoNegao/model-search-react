@@ -61,8 +61,4 @@ const TextFieldCustom = styled.div`
   }
 `;
 
-// &:hover ${InputCustom} {
-//   display: none;
-// }
-
 export { LabelCustom, TextFieldCustom, InputCustom };
