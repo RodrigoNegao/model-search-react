@@ -1,20 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import {
-  Link,
-  Wrapper,
-  Carousel,
-  Container,
-  Search,
-  Logo,
-  CarouselTitle,
-  ModalTitle,
-  ModalContent,
-  ModalOpen,
-} from './styles';
+import { Link, Wrapper, Carousel, Container, Search, Logo, CarouselTitle } from './styles';
 import logo from '../../assets/logo1.svg';
-import { ItemCard, Card, Modal, Map, Loader, Skeleton, SearchFieldCustom } from '../../components';
+import { ItemCard, Card, Map, Loader, SearchFieldCustom, ModalCustom } from '../../components';
 
 const Home = () => {
   const [value, setInputValue] = useState('');
@@ -49,6 +38,7 @@ const Home = () => {
 
   function handleOpenModal(placeId) {
     setItemId(placeId);
+    console.log('Home>>>', placeId);
     setModalOpened(true);
   }
 
@@ -88,25 +78,7 @@ const Home = () => {
         ))}
       </Container>
       <Map query={query} placeId={placeId} />
-      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-        {itemSelected ? (
-          <>
-            <ModalTitle>{itemSelected?.name}</ModalTitle>
-            <ModalContent>{itemSelected?.formatted_phone_number}</ModalContent>
-            <ModalContent>{itemSelected?.formatted_address}</ModalContent>
-            <ModalOpen>
-              {itemSelected?.opening_hours?.isOpen ? 'Aberto Agora o/' : 'Fechado neste momento'}
-            </ModalOpen>
-          </>
-        ) : (
-          <>
-            <Skeleton width="10px" height="25px" />
-            <Skeleton width="10px" height="10px" />
-            <Skeleton width="10px" height="10px" />
-            <Skeleton width="10px" height="10px" />
-          </>
-        )}
-      </Modal>
+      <ModalCustom open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
     </Wrapper>
   );
 };

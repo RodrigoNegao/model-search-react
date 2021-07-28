@@ -1,6 +1,8 @@
 ## Modelo de Pesquisa no Google API em React
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a9ee0fbb-3073-42af-8398-249edc8d6ee0/deploy-status)](https://app.netlify.com/sites/localizabar/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a9ee0fbb-3073-42af-8398-249edc8d6ee0/deploy-status)](https://localizabar.netlify.app/)
+
+### [Deploys](https://app.netlify.com/sites/localizabar/deploys)
 
 ### [Lugares](https://developers.google.com/maps/documentation/places/web-service/supported_types)
 

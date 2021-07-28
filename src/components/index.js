@@ -6,3 +6,4 @@ export { default as Loader } from './Loader';
 export { default as Skeleton } from './Skeleton';
 export { default as TextFieldCustom } from './TextFieldCustom';
 export { default as SearchFieldCustom } from './SearchFieldCustom';
+export { default as ModalCustom } from './ModalCustom';

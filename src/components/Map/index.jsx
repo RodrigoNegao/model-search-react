@@ -2,13 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
+import { ModalCustom } from '../index';
 import { setItems, setItem } from '../../redux/modules/items';
+// import { handleOpenModalGlobal } from '../../pages/Home';
 
 const MapContainer = (props) => {
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.items);
+  const [, setItemId] = useState(null);
   const [map, setMap] = useState(null);
   const { google, query, placeId } = props;
+  const [modalOpened, setModalOpened] = useState(false);
 
   const searchbyQuery = useCallback(
     (map, query) => {
@@ -83,6 +87,12 @@ const MapContainer = (props) => {
     searchNearby(map, map.center);
   }
 
+  function handleOpenModal(placeId) {
+    setItemId(placeId);
+    console.log('Map>>>', placeId);
+    setModalOpened(true);
+  }
+
   return (
     <Map
       google={google}
@@ -99,9 +109,11 @@ const MapContainer = (props) => {
             lat: item.geometry.location.lat(),
             lng: item.geometry.location.lng(),
           }}
+          onClick={() => handleOpenModal(item.place_id)}
         />
       ))}
       <Marker />
+      <ModalCustom open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
     </Map>
   );
 };
