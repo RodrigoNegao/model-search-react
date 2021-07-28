@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
+  Link,
   Wrapper,
   Carousel,
   Container,
@@ -55,7 +56,9 @@ const Home = () => {
     <Wrapper>
       <Container>
         <Search>
-          <Logo src={logo} alt="logo do restaurante" />
+          <Link href="https://github.com/RodrigoNegao/model-search-react" target="_blank">
+            <Logo src={logo} alt="logo do restaurante" />
+          </Link>
           <SearchFieldCustom
             value={value}
             onKeyPress={handleKeyPress}

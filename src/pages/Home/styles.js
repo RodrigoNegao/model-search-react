@@ -27,6 +27,11 @@ const Logo = styled.img`
   height: 50px;
 `;
 
+const Link = styled.a`
+  display: flex;
+  justify-content: center;
+`;
+
 const CarouselTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.regular};
   color: ${(props) => props.theme.colors.text};
@@ -73,6 +78,7 @@ const ModalOpen = styled.p`
 `;
 
 export {
+  Link,
   Wrapper,
   Carousel,
   Container,
