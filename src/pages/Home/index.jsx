@@ -74,7 +74,11 @@ const Home = () => {
           )}
         </Search>
         {items.map((item) => (
-          <ItemCard item={item} onClick={() => handleOpenModal(item.place_id)} />
+          <ItemCard
+            key={'itemcard' + item.place_id}
+            item={item}
+            onClick={() => handleOpenModal(item.place_id)}
+          />
         ))}
       </Container>
       <Map query={query} placeId={placeId} />
